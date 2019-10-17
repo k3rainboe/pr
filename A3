@@ -1,0 +1,178 @@
+
+
+Database changed
+mysql>  create table student(Roll_no int primary key,Name varchar(20),Branch varchar(15),Marks int);
+Query OK, 0 rows affected (0.47 sec)
+
+mysql> insert into student values (1,'Ravi','Comp',90);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into student values (2,'Vedika','Comp',60);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into student values (3,'Aarush','IT',95);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into student values (4,'Jyoti','IT',70);
+Query OK, 1 row affected (0.07 sec)
+
+
+mysql> select * from student;
++---------+--------+--------+-------+
+| Roll_no | Name   | Branch | Marks |
++---------+--------+--------+-------+
+|       1 | Ravi   | Comp   |    90 |
+|       2 | Vedika | Comp   |    60 |
+|       3 | Aarush | IT     |    95 |
+|       4 | Jyoti  | IT     |    70 |
++---------+--------+--------+-------+
+4 rows in set (0.00 sec)
+
+
+mysql> select Roll_no,Name,Marks from student  where Marks > 70;
++---------+--------+-------+
+| Roll_no | Name   | Marks |
++---------+--------+-------+
+|       1 | Ravi   |    90 |
+|       3 | Aarush |    95 |
++---------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select Roll_no,Name,Marks from student  where Marks < 70;
++---------+--------+-------+
+| Roll_no | Name   | Marks |
++---------+--------+-------+
+|       2 | Vedika |    60 |
++---------+--------+-------+
+1 row in set (0.00 sec)
+
+mysql> select Roll_no,Name,Marks from student  where Marks = 70 and Name='Vedika';
+Empty set (0.00 sec)
+
+mysql> update student
+    -> set Name='Sachin'
+    -> where Name='Ravi'
+    -> ;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++---------+--------+--------+-------+
+| Roll_no | Name   | Branch | Marks |
++---------+--------+--------+-------+
+|       1 | Sachin | Comp   |    90 |
+|       2 | Vedika | Comp   |    60 |
+|       3 | Aarush | IT     |    95 |
+|       4 | Jyoti  | IT     |    70 |
++---------+--------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> delete from student 
+    -> where Name='Aarush';
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from student;
++---------+--------+--------+-------+
+| Roll_no | Name   | Branch | Marks |
++---------+--------+--------+-------+
+|       1 | Sachin | Comp   |    90 |
+|       2 | Vedika | Comp   |    60 |
+|       4 | Jyoti  | IT     |    70 |
++---------+--------+--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select max(Marks) as Max_mrks 
+    -> from student;
++----------+
+| Max_mrks |
++----------+
+|       90 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select max(Marks) as Max_mrks  from student where Branch='Comp';
++----------+
+| Max_mrks |
++----------+
+|       90 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select min(Marks) as Min_mrks  from student where Branch='Comp';
++----------+
+| Min_mrks |
++----------+
+|       60 |
++----------+
+1 row in set (0.00 sec)
+
+
+
+mysql> select max(Marks) as Max_mrks  from student where Branch='IT';
++----------+
+| Max_mrks |
++----------+
+|       70 |
++----------+
+1 row in set (0.00 sec)
+
+
+mysql> select sum(Marks) as sum_mrks  from student where Branch='Comp';
++----------+
+| sum_mrks |
++----------+
+|      150 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select sum(Marks) as sum_mrks  from student where Branch='IT';
++----------+
+| sum_mrks |
++----------+
+|       70 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select avg(Marks) as avg_mrks  from student where Branch='IT';
++----------+
+| avg_mrks |
++----------+
+|  70.0000 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select avg(Marks) as avg_mrks  from student where Branch='Comp';
++----------+
+| avg_mrks |
++----------+
+|  75.0000 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select count(Marks) as Count  from student where Branch='Comp';
++-------+
+| Count |
++-------+
+|     2 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select count(Marks) as Count  from student where Branch='IT';
++-------+
+| Count |
++-------+
+|     1 |
++-------+
+1 row in set (0.00 sec)
+
+
+mysql> select min(Marks) as Min_mrks  from student where Branch='IT';
++----------+
+| Max_mrks |
++----------+
+|       70 |
++----------+
+1 row in set (0.00 sec)
+
+
+

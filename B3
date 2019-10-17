@@ -1,0 +1,60 @@
+		INDEXING
+
+> db.stud_data.createIndex({'RollNo':1})
+{
+	"createdCollectionAutomatically" : false,
+	"numIndexesBefore" : 1,
+	"numIndexesAfter" : 2,
+	"ok" : 1
+}
+> db.stud_data.createIndex({'RollNo':1,'Name':-1})
+{
+	"createdCollectionAutomatically" : false,
+	"numIndexesBefore" : 2,
+	"numIndexesAfter" : 3,
+	"ok" : 1
+}
+> db.stud_data.getIndexes()
+[
+	{
+		"v" : 1,
+		"key" : {
+			"_id" : 1
+		},
+		"name" : "_id_",
+		"ns" : "TEA59.stud_data"
+	},
+	{
+		"v" : 1,
+		"key" : {
+			"RollNo" : 1
+		},
+		"name" : "RollNo_1",
+		"ns" : "TEA59.stud_data"
+	},
+	{
+		"v" : 1,
+		"key" : {
+			"RollNo" : 1,
+			"Name" : -1
+		},
+		"name" : "RollNo_1_Name_-1",
+		"ns" : "TEA59.stud_data"
+	}
+]
+
+
+		AGGRIGATION
+> db.stud_data.aggregate([{$group:{_id:'RollNo', add:{$sum:1}}}])
+{ "_id" : "RollNo", "add" : 7 }
+
+> db.stud_data.aggregate([{$group:{_id:'RollNo', add:{$avg:'$Marks'}}}])
+{ "_id" : "RollNo", "add" : 92 }
+
+> db.stud_data.aggregate([{$group:{_id:'RollNo', add:{$push:'$Marks'}}}])
+{ "_id" : "RollNo", "add" : [ 90, 95, 96, 87 ] }
+
+> db.stud_data.aggregate([{$group:{_id:'RollNo', add:{$addToSet:'$Marks'}}}])
+{ "_id" : "RollNo", "add" : [ 87, 96, 95, 90 ] }
+>
+ 

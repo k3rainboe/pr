@@ -1,0 +1,105 @@
+> db.stud_data.insert([{'RollNo':1,'Name':'Suchita','Div':'A','Marks':90},{'RollNo':2,'Name':'Rohit','marks':84},{'RollNo':4,'Name':'Amit','Div':'B'},{'RollNo':6,'Name':'Ruchi','Marks':95}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 4,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.stud_data.find().pretty()
+{
+	"_id" : ObjectId("5ba9cc19643a5f53b8cc6401"),
+	"RollNo" : 1,
+	"Name" : "Suchita",
+	"Div" : "A",
+	"Marks" : 90
+}
+{
+	"_id" : ObjectId("5ba9cc19643a5f53b8cc6402"),
+	"RollNo" : 2,
+	"Name" : "Rohit",
+	"marks" : 84
+}
+{
+	"_id" : ObjectId("5ba9cc19643a5f53b8cc6403"),
+	"RollNo" : 4,
+	"Name" : "Amit",
+	"Div" : "B"
+}
+{
+	"_id" : ObjectId("5ba9cc19643a5f53b8cc6404"),
+	"RollNo" : 6,
+	"Name" : "Ruchi",
+	"Marks" : 95
+}
+> db.stud_data.find({'Name':'Suchita'}).pretty()
+{
+	"_id" : ObjectId("5ba9cc19643a5f53b8cc6401"),
+	"RollNo" : 1,
+	"Name" : "Suchita",
+	"Div" : "A",
+	"Marks" : 90
+}
+> db.stud_data.find({Marks:{$lt:90}}).pretty()
+{
+	"_id" : ObjectId("5ba9cc19643a5f53b8cc6402"),
+	"RollNo" : 2,
+	"Name" : "Rohit",
+	"marks" : 84
+}
+> db.stud_data.find({RollNo:{$lte:5}}).pretty()
+{
+	"_id" : ObjectId("5ba9cc19643a5f53b8cc6401"),
+	"RollNo" : 1,
+	"Name" : "Suchita",
+	"Div" : "A",
+	"Marks" : 90
+}
+{
+	"_id" : ObjectId("5ba9cc19643a5f53b8cc6402"),
+	"RollNo" : 2,
+	"Name" : "Rohit",
+	"marks" : 84
+}
+{
+	"_id" : ObjectId("5ba9cc19643a5f53b8cc6403"),
+	"RollNo" : 4,
+	"Name" : "Amit",
+	"Div" : "B"
+}
+> db.stud_data.find({Marks:{$ne:90}}).pretty()
+{
+	"_id" : ObjectId("5ba9cc19643a5f53b8cc6402"),
+	"RollNo" : 2,
+	"Name" : "Rohit",
+	"marks" : 84
+}
+{
+	"_id" : ObjectId("5ba9cc19643a5f53b8cc6403"),
+	"RollNo" : 4,
+	"Name" : "Amit",
+	"Div" : "B"
+}
+{
+	"_id" : ObjectId("5ba9cc19643a5f53b8cc6404"),
+	"RollNo" : 6,
+	"Name" : "Ruchi",
+	"Marks" : 95
+}
+> db.stud_data.find({Marks:{$gt:90}}).pretty()
+{
+	"_id" : ObjectId("5ba9cc19643a5f53b8cc6404"),
+	"RollNo" : 6,
+	"Name" : "Ruchi",
+	"Marks" : 95
+}
+> db.stud_data.find({Marks:{$gt:90}}).pretty()
+{
+	"_id" : ObjectId("5ba9cc19643a5f53b8cc6404"),
+	"RollNo" : 6,
+	"Name" : "Ruchi",
+	"Marks" : 95
+}

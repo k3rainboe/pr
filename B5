@@ -1,0 +1,299 @@
+
+/*
+Problem Statement :Implement any 5 Queries using MongoDB.
+
+*/
+> use Arpita
+switched to db Arpita
+
+> db.createCollection("student")
+{ "ok" : 1 }
+
+> db.student.insert({Rollno:1,Name:'Shreya',Address:'Nashik',Marks:85})
+WriteResult({ "nInserted" : 1 })
+
+> db.student.insert({Rollno:2,Name:'Aditi',Address:'Munbai',Marks:90})
+WriteResult({ "nInserted" : 1 })
+
+> db.student.insert({Rollno:3,Name:'Dipika',Address:'Pune',Marks:95})
+WriteResult({ "nInserted" : 1 })
+
+> db.student.insert({Rollno:4,Name:'ABC',Address:'Pune',Marks:75})
+WriteResult({ "nInserted" : 1 })
+
+> db.student.insert({Rollno:5,Name:'PQR',Address:'Nashik',Marks:70})
+WriteResult({ "nInserted" : 1 })
+
+> db.student.update({'Address':'Munbai'},{$set:{'Address':'Mumbai'})
+
+> db.student.find().pretty()
+{
+	"_id" : ObjectId("5d885a454d0e4ac00790657d"),
+	"Rollno" : 1,
+	"Name" : "Shreya",
+	"Address" : "Nashik",
+	"Marks" : 85
+}
+{
+	"_id" : ObjectId("5d885a6f4d0e4ac00790657e"),
+	"Rollno" : 2,
+	"Name" : "Aditi",
+	"Address" : "Munbai",
+	"Marks" : 90
+}
+{
+	"_id" : ObjectId("5d885a934d0e4ac00790657f"),
+	"Rollno" : 3,
+	"Name" : "Dipika",
+	"Address" : "Pune",
+	"Marks" : 95
+}
+{
+	"_id" : ObjectId("5d885aad4d0e4ac007906580"),
+	"Rollno" : 4,
+	"Name" : "ABC",
+	"Address" : "Pune",
+	"Marks" : 75
+}
+{
+	"_id" : ObjectId("5d885acf4d0e4ac007906581"),
+	"Rollno" : 5,
+	"Name" : "PQR",
+	"Address" : "Nashik",
+	"Marks" : 70
+}
+
+> db.student.update({'Addres':'Munbai'},{$set:{'Address':'Mumbai'}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+
+> db.student.find().pretty()
+{
+	"_id" : ObjectId("5d885a454d0e4ac00790657d"),
+	"Rollno" : 1,
+	"Name" : "Shreya",
+	"Address" : "Nashik",
+	"Marks" : 85
+}
+{
+	"_id" : ObjectId("5d885a6f4d0e4ac00790657e"),
+	"Rollno" : 2,
+	"Name" : "Aditi",
+	"Address" : "Munbai",
+	"Marks" : 90
+}
+{
+	"_id" : ObjectId("5d885a934d0e4ac00790657f"),
+	"Rollno" : 3,
+	"Name" : "Dipika",
+	"Address" : "Pune",
+	"Marks" : 95
+}
+{
+	"_id" : ObjectId("5d885aad4d0e4ac007906580"),
+	"Rollno" : 4,
+	"Name" : "ABC",
+	"Address" : "Pune",
+	"Marks" : 75
+}
+{
+	"_id" : ObjectId("5d885acf4d0e4ac007906581"),
+	"Rollno" : 5,
+	"Name" : "PQR",
+	"Address" : "Nashik",
+	"Marks" : 70
+}
+
+> db.student.update({'Addres':'Munbai'},{$set:{'Address':'Mumbai'}},{mlti:true})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+
+> db.student.find().pretty()
+{
+	"_id" : ObjectId("5d885a454d0e4ac00790657d"),
+	"Rollno" : 1,
+	"Name" : "Shreya",
+	"Address" : "Nashik",
+	"Marks" : 85
+}
+{
+	"_id" : ObjectId("5d885a6f4d0e4ac00790657e"),
+	"Rollno" : 2,
+	"Name" : "Aditi",
+	"Address" : "Munbai",
+	"Marks" : 90
+}
+{
+	"_id" : ObjectId("5d885a934d0e4ac00790657f"),
+	"Rollno" : 3,
+	"Name" : "Dipika",
+	"Address" : "Pune",
+	"Marks" : 95
+}
+{
+	"_id" : ObjectId("5d885aad4d0e4ac007906580"),
+	"Rollno" : 4,
+	"Name" : "ABC",
+	"Address" : "Pune",
+	"Marks" : 75
+}
+{
+	"_id" : ObjectId("5d885acf4d0e4ac007906581"),
+	"Rollno" : 5,
+	"Name" : "PQR",
+	"Address" : "Nashik",
+	"Marks" : 70
+}
+> db.student.find({"Marks":{$lt:85}}).pretty()
+{
+	"_id" : ObjectId("5d885aad4d0e4ac007906580"),
+	"Rollno" : 4,
+	"Name" : "ABC",
+	"Address" : "Pune",
+	"Marks" : 75
+}
+{
+	"_id" : ObjectId("5d885acf4d0e4ac007906581"),
+	"Rollno" : 5,
+	"Name" : "PQR",
+	"Address" : "Nashik",
+	"Marks" : 70
+}
+
+> db.student.find({"Marks":{$lte:75}}).pretty()
+{
+	"_id" : ObjectId("5d885aad4d0e4ac007906580"),
+	"Rollno" : 4,
+	"Name" : "ABC",
+	"Address" : "Pune",
+	"Marks" : 75
+}
+{
+	"_id" : ObjectId("5d885acf4d0e4ac007906581"),
+	"Rollno" : 5,
+	"Name" : "PQR",
+	"Address" : "Nashik",
+	"Marks" : 70
+}
+> db.student.find({"Marks":{$gt:90}}).pretty()
+{
+	"_id" : ObjectId("5d885a934d0e4ac00790657f"),
+	"Rollno" : 3,
+	"Name" : "Dipika",
+	"Address" : "Pune",
+	"Marks" : 95
+}
+> db.student.find({"Marks":{$gte:90}}).pretty()
+{
+	"_id" : ObjectId("5d885a6f4d0e4ac00790657e"),
+	"Rollno" : 2,
+	"Name" : "Aditi",
+	"Address" : "Munbai",
+	"Marks" : 90
+}
+{
+	"_id" : ObjectId("5d885a934d0e4ac00790657f"),
+	"Rollno" : 3,
+	"Name" : "Dipika",
+	"Address" : "Pune",
+	"Marks" : 95
+}
+
+> db.student.find({"Marks":{$gte:75}}).pretty()
+{
+	"_id" : ObjectId("5d885a454d0e4ac00790657d"),
+	"Rollno" : 1,
+	"Name" : "Shreya",
+	"Address" : "Nashik",
+	"Marks" : 85
+}
+{
+	"_id" : ObjectId("5d885a6f4d0e4ac00790657e"),
+	"Rollno" : 2,
+	"Name" : "Aditi",
+	"Address" : "Munbai",
+	"Marks" : 90
+}
+{
+	"_id" : ObjectId("5d885a934d0e4ac00790657f"),
+	"Rollno" : 3,
+	"Name" : "Dipika",
+	"Address" : "Pune",
+	"Marks" : 95
+}
+{
+	"_id" : ObjectId("5d885aad4d0e4ac007906580"),
+	"Rollno" : 4,
+	"Name" : "ABC",
+	"Address" : "Pune",
+	"Marks" : 75
+}
+
+> db.student.find({$and:[{Rollno:1},{Name:'Shreya'}]}).pretty()
+{
+	"_id" : ObjectId("5d885a454d0e4ac00790657d"),
+	"Rollno" : 1,
+	"Name" : "Shreya",
+	"Address" : "Nashik",
+	"Marks" : 85
+}
+
+> db.student.find({$or:[{Rollno:1},{Name:'Shreya'}]}).pretty()
+{
+	"_id" : ObjectId("5d885a454d0e4ac00790657d"),
+	"Rollno" : 1,
+	"Name" : "Shreya",
+	"Address" : "Nashik",
+	"Marks" : 85
+}
+
+
+> db.student.save({Rollno:5,Name:'PQR',Address:'Nashik',Marks:70})
+WriteResult({ "nInserted" : 1 })
+
+> db.student.find().pretty()
+{
+	"_id" : ObjectId("5d885a454d0e4ac00790657d"),
+	"Rollno" : 1,
+	"Name" : "Shreya",
+	"Address" : "Nashik",
+	"Marks" : 85
+}
+{
+	"_id" : ObjectId("5d885a6f4d0e4ac00790657e"),
+	"Rollno" : 2,
+	"Name" : "Aditi",
+	"Address" : "Munbai",
+	"Marks" : 90
+}
+{
+	"_id" : ObjectId("5d885a934d0e4ac00790657f"),
+	"Rollno" : 3,
+	"Name" : "Dipika",
+	"Address" : "Pune",
+	"Marks" : 95
+}
+{
+	"_id" : ObjectId("5d885aad4d0e4ac007906580"),
+	"Rollno" : 4,
+	"Name" : "ABC",
+	"Address" : "Pune",
+	"Marks" : 75
+}
+{
+	"_id" : ObjectId("5d885acf4d0e4ac007906581"),
+	"Rollno" : 5,
+	"Name" : "PQR",
+	"Address" : "Nashik",
+	"Marks" : 70
+}
+{
+	"_id" : ObjectId("5d8860564d0e4ac007906582"),
+	"Rollno" : 5,
+	"Name" : "PQR",
+	"Address" : "Nashik",
+	"Marks" : 70
+}
+
+> ^C
+bye
+gescoe@gescoe-OptiPlex-3010:~$ 
+

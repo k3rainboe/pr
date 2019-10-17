@@ -1,0 +1,89 @@
+
+> use TEA34
+switched to db TEA34
+> db.createCollection("stud_data")
+{ "ok" : 1 }
+> db.stud_data.insert([{'RollNo':1,'Name':'Suchita','Div':'A','Marks':90},{'RollNo':2,'Name':'Rohit','Div':'B''marks':84},{'RollNo':4,'Name':'Amit','Div':'B'},{'RollNo':6,'Name':'Ruchi','Div':'A''Marks':95}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 4,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.stud_data.insert({'RollNo':8,'Name':'Madhav','Div':'A''Marks':90})
+WriteResult({ "nInserted" : 1 })
+> db.stud_data.find().pretty()
+{
+	"_id" : ObjectId("5bbafdb63e02fa3b6f716e2e"),
+	"RollNo" : 1,
+	"Name" : "Suchita",
+	"Div" : "A",
+	"Marks" : 90
+}
+{
+	"_id" : ObjectId("5bbafdb63e02fa3b6f716e2f"),
+	"RollNo" : 2,
+	"Name" : "Rohit",
+	"Div" : "B",
+	"marks" : 84
+}
+{
+	"_id" : ObjectId("5bbafdb63e02fa3b6f716e30"),
+	"RollNo" : 4,
+	"Name" : "Amit",
+	"Div" : "B"
+}
+{
+	"_id" : ObjectId("5bbafdb63e02fa3b6f716e31"),
+	"RollNo" : 6,
+	"Name" : "Ruchi",
+	"Div" : "A",
+	"Marks" : 95
+}
+{
+	"_id" : ObjectId("5bbafe1e3e02fa3b6f716e32"),
+	"RollNo" : 8,
+	"Name" : "Madhav",
+	"Div" : "A",
+	"Marks" : 90
+}
+//1.show only names uasing map-reduce fun 
+
+> db.stud.mapReduce(function(){emit(this.Name,1)},function(key,values) {return Array.sum(values)},{out:'Name_Total'}).find() 
+{ "_id" : "Suchita", "value" : 2 } 
+{ "_id" : "Rohit", "value" : 2 } 
+{ "_id" : "Madhav", "value" : 1 } 
+
+/2.show names and marks using map-reduce fun 
+
+db.stud.mapReduce(function(){emit(this.Name,this.Marks)},function(key,values) {return Array.sum(values)},{out:'Name_Total'}).find() 
+{ "_id" : "Suchita", "value" : 90 } 
+{ "_id" : "Rohit", "value" : 179 } 
+{ "_id" : "Madhav", "value" : 90 } 
+
+//3.with sort show names and marks using map-reduce fun 
+
+>db.stud.mapReduce(function(){emit(this.Name,this.Marks)},function(key,values) {return Array.sum(values)},{out:'Name_Total'}).find().sort({value:1}) 
+ { "_id" : "Madhav", "value" : 90 } 
+ { "_id" : "Rohit", "value" : 179 } 
+ { "_id" : "Suchita", "value" : 90 } 
+
+>db.stud.mapReduce(function(){emit(this.Name,this.Marks)},function(key,values) {return Array.sum(values)},{query:{Marks:{$gt:95}},out:'Name_Total'}).find() 
+ { "_id" : "Rohit", "value" : 84 } 
+ { "_id" : "Rohit", "value" : 95 } 
+
+> db.stud.mapReduce(function(){emit(this.Name,1)},function(key,values) {return Array.sum(values)},{query:{Marks:{$gt:95}},out:'Name_Total'}).find()
+ { "_id" : "Rohit", "value" : 84 } 
+ { "_id" : "Rohit", "value" : 95 } 
+ 
+
+//use limit 
+db.stud.mapReduce(function(){emit(this.Name,1)},function(key,values) {return Array.sum(values)},{query:{Marks:{$gt:95}},out:'Name_Total'}).find().limit(1)
+{ "_id" : "Rohit", "value" : 1 }  
+
+
+

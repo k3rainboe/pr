@@ -1,0 +1,198 @@
+
+> db.stud_data.insert([{'RollNo':5,'Name':'Sima','Div':'A','Marks':96},{'RollNo':8,'Name':'Ronit','marks':75},{'RollNo':9,'Name':'Ajit','Div':'B','Marks':87}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 3,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.stud_data.find().pretty()
+{
+	"_id" : ObjectId("5bab1c43e1eec2766b3e1541"),
+	"RollNo" : 1,
+	"Name" : "Suchita",
+	"Div" : "A",
+	"Marks" : 90
+}
+{
+	"_id" : ObjectId("5bab1c43e1eec2766b3e1542"),
+	"RollNo" : 2,
+	"Name" : "Rohit",
+	"marks" : 84
+}
+{
+	"_id" : ObjectId("5bab1c43e1eec2766b3e1543"),
+	"RollNo" : 4,
+	"Name" : "Amit",
+	"Div" : "A"
+}
+{
+	"_id" : ObjectId("5bab1c43e1eec2766b3e1544"),
+	"RollNo" : 6,
+	"Name" : "Ruchi",
+	"Marks" : 95
+}
+{
+	"_id" : ObjectId("5bab1d51e1eec2766b3e1545"),
+	"RollNo" : 5,
+	"Name" : "Sima",
+	"Div" : "A",
+	"Marks" : 96
+}
+{
+	"_id" : ObjectId("5bab1d51e1eec2766b3e1546"),
+	"RollNo" : 8,
+	"Name" : "Ronit",
+	"marks" : 75
+}
+{
+	"_id" : ObjectId("5bab1d51e1eec2766b3e1547"),
+	"RollNo" : 9,
+	"Name" : "Ajit",
+	"Div" : "B",
+	"Marks" : 87
+}
+> db.stud_data.update({'Div':'A'},{$set:{'Div':'B'}},{multi:true})
+WriteResult({ "nMatched" : 3, "nUpserted" : 0, "nModified" : 3 })
+> db.stud_data.find().pretty()
+{
+	"_id" : ObjectId("5bab1c43e1eec2766b3e1541"),
+	"RollNo" : 1,
+	"Name" : "Suchita",
+	"Div" : "B",
+	"Marks" : 90
+}
+{
+	"_id" : ObjectId("5bab1c43e1eec2766b3e1542"),
+	"RollNo" : 2,
+	"Name" : "Rohit",
+	"marks" : 84
+}
+{
+	"_id" : ObjectId("5bab1c43e1eec2766b3e1543"),
+	"RollNo" : 4,
+	"Name" : "Amit",
+	"Div" : "B"
+}
+{
+	"_id" : ObjectId("5bab1c43e1eec2766b3e1544"),
+	"RollNo" : 6,
+	"Name" : "Ruchi",
+	"Marks" : 95
+}
+{
+	"_id" : ObjectId("5bab1d51e1eec2766b3e1545"),
+	"RollNo" : 5,
+	"Name" : "Sima",
+	"Div" : "B",
+	"Marks" : 96
+}
+{
+	"_id" : ObjectId("5bab1d51e1eec2766b3e1546"),
+	"RollNo" : 8,
+	"Name" : "Ronit",
+	"marks" : 75
+}
+{
+	"_id" : ObjectId("5bab1d51e1eec2766b3e1547"),
+	"RollNo" : 9,
+	"Name" : "Ajit",
+	"Div" : "B",
+	"Marks" : 87
+}
+> db.stud_data.find().sort(({'Name':1})).pretty()
+{
+	"_id" : ObjectId("5bab1d51e1eec2766b3e1547"),
+	"RollNo" : 9,
+	"Name" : "Ajit",
+	"Div" : "B",
+	"Marks" : 87
+}
+{
+	"_id" : ObjectId("5bab1c43e1eec2766b3e1543"),
+	"RollNo" : 4,
+	"Name" : "Amit",
+	"Div" : "B"
+}
+{
+	"_id" : ObjectId("5bab1c43e1eec2766b3e1542"),
+	"RollNo" : 2,
+	"Name" : "Rohit",
+	"marks" : 84
+}
+{
+	"_id" : ObjectId("5bab1d51e1eec2766b3e1546"),
+	"RollNo" : 8,
+	"Name" : "Ronit",
+	"marks" : 75
+}
+{
+	"_id" : ObjectId("5bab1c43e1eec2766b3e1544"),
+	"RollNo" : 6,
+	"Name" : "Ruchi",
+	"Marks" : 95
+}
+{
+	"_id" : ObjectId("5bab1d51e1eec2766b3e1545"),
+	"RollNo" : 5,
+	"Name" : "Sima",
+	"Div" : "B",
+	"Marks" : 96
+}
+{
+	"_id" : ObjectId("5bab1c43e1eec2766b3e1541"),
+	"RollNo" : 1,
+	"Name" : "Suchita",
+	"Div" : "B",
+	"Marks" : 90
+}
+> db.stud_data.find().sort(({'Name':-1})).pretty()
+{
+	"_id" : ObjectId("5bab1c43e1eec2766b3e1541"),
+	"RollNo" : 1,
+	"Name" : "Suchita",
+	"Div" : "B",
+	"Marks" : 90
+}
+{
+	"_id" : ObjectId("5bab1d51e1eec2766b3e1545"),
+	"RollNo" : 5,
+	"Name" : "Sima",
+	"Div" : "B",
+	"Marks" : 96
+}
+{
+	"_id" : ObjectId("5bab1c43e1eec2766b3e1544"),
+	"RollNo" : 6,
+	"Name" : "Ruchi",
+	"Marks" : 95
+}
+{
+	"_id" : ObjectId("5bab1d51e1eec2766b3e1546"),
+	"RollNo" : 8,
+	"Name" : "Ronit",
+	"marks" : 75
+}
+{
+	"_id" : ObjectId("5bab1c43e1eec2766b3e1542"),
+	"RollNo" : 2,
+	"Name" : "Rohit",
+	"marks" : 84
+}
+{
+	"_id" : ObjectId("5bab1c43e1eec2766b3e1543"),
+	"RollNo" : 4,
+	"Name" : "Amit",
+	"Div" : "B"
+}
+{
+	"_id" : ObjectId("5bab1d51e1eec2766b3e1547"),
+	"RollNo" : 9,
+	"Name" : "Ajit",
+	"Div" : "B",
+	"Marks" : 87
+}
